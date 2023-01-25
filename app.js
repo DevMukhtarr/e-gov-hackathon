@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors"
 import authroute from "./routes/authroute.js"
 import mainroute from "./routes/mainroute.js"
+import connect from "./config/connect.js"
 const app = express()
 
 

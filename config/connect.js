@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 import "dotenv/config";
 const app = express();
 
+
+mongoose.set("strictQuery", false);
 mongoose
   .connect(process.env.MONGO_URI_LOCAL, {
     useNewUrlParser: true,
