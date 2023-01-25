@@ -15,6 +15,7 @@ const user = new Schema({
     picture: {type: String, default:null},
     local_government_area: {type: String, default:null},
     picture: {type: String, default:null},
+    polling_unit: {type: String, default:null},
     role: {
         type: String,
         required: true,
