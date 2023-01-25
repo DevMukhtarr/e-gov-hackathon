@@ -6,19 +6,19 @@ const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
 
 export const signup = async (req, res) => {
     try {
+
+        const { email, name, role, password } = req.body
         // check if user already exists
         const existingUser = await User.findOne({ email: req.body.email });
         if (existingUser) {
             return res.status(400).json({ message: 'A user with that email already exists' });
         }
-        const password = req.body.password;
         const encryptedPassword = await bcrypt.hash(password, 12);
         // create a new user
         const user = new User({
-            email: req.body.email,
-            name: req.body.name,
-            role: req.body.role,
-            address: req.body.address,
+            email: email,
+            name: name,
+            role: role,
             password: encryptedPassword
         });
 
