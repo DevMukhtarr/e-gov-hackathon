@@ -21,6 +21,7 @@ const user = new Schema({
         enum: ['admin','agent']
     },
     is_active: {type: Boolean, default:false},
+    
 })
 
 export default mongoose.model("User", user)
