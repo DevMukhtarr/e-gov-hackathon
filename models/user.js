@@ -6,7 +6,7 @@ const user = new Schema({
     role: {
         type: String,
         required: true,
-        enum: ['admins','inec_official', 'agents']
+        enum: ['admins','inec_official', 'agent', 'po']
     },
 })
 
