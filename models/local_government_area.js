@@ -3,8 +3,9 @@ import constituency from "./constituency";
 const Schema = mongoose.Schema;
 
 const local_government_area = new Schema({
-    constituency_id: {type: Schema.Types.ObjectId, ref: constituency, required: true},
-    name: {type: String, default:null}
+    constituencies: [{type: String, default:null}],
+    name: {type: String, default:null},
+    wards: [{type: String, default:null}]
 })
 
 export default mongoose.model("LGA", local_government_area)
