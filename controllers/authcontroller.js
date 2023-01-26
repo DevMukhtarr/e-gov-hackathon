@@ -1,3 +1,4 @@
+import dotenv from "dotenv";
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import User from '../models/user.js';
@@ -7,7 +8,22 @@ const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
 export const signup = async (req, res) => {
     try {
 
-        const { email, name, role, password } = req.body
+        const { 
+            first_name,
+            last_name,
+            middle_name,
+            email,
+            state,
+            password,
+            date_of_birth,
+            date_created,
+            date_modified,
+            gender,
+            picture,
+            local_government_area,
+            polling_unit,
+            role
+        } = req.body
         // check if user already exists
         const existingUser = await User.findOne({ email: req.body.email });
         if (existingUser) {
@@ -16,10 +32,20 @@ export const signup = async (req, res) => {
         const encryptedPassword = await bcrypt.hash(password, 12);
         // create a new user
         const user = new User({
-            email: email,
-            name: name,
-            role: role,
-            password: encryptedPassword
+            first_name,
+            last_name,
+            middle_name,
+            email,
+            state,
+            password : encryptedPassword,
+            date_of_birth,
+            date_created,
+            date_modified,
+            gender,
+            picture,
+            local_government_area,
+            polling_unit,
+            role
         });
 
         // save the user to the database
