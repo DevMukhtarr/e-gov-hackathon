@@ -12,7 +12,7 @@ export const addResult = async (req, res) =>{
             election_type,
             } = req.body
         
-            if(!(agent && scores && registered_voters && accredited_voters && valid_votes && invalid_votes && election_type && polling_unit)){
+            if(!(agent && scores && registered_voters && accredited_voters && valid_votes && invalid_votes && election_type )){
                 return res.json({
                     message: "all inputs cannot be empty"
                 })
@@ -25,7 +25,6 @@ export const addResult = async (req, res) =>{
                 valid_votes,
                 invalid_votes,
                 election_type,
-                polling_unit
             })
         
             return res.json({

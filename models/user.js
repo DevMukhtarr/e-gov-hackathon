@@ -14,7 +14,17 @@ const userSchema = new Schema({
     gender: {type: String, default:null},
     picture: {type: String, default:null},
     local_government_area: {type: String, default:null},
+<<<<<<< HEAD
+<<<<<<< HEAD
+    picture: {type: String, default:null},
+    polling_unit: {type: String, default:null},
+=======
     polling_unit: {type: String, default: null},
+>>>>>>> b337ff2d4309d2a4039d8039f0e984e6fd2e206b
+=======
+    picture: {type: String, default:null},
+    polling_unit: {type: String, default:null},
+>>>>>>> b2d20b8
     role: {
     type: String,
     required: true,
