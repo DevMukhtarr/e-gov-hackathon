@@ -11,6 +11,7 @@ const result = new Schema({
     invalid_votes: {type: Number, default: null},
     election_type: {type: String, default: null},
     polling_unit: {type: String, default: null},
+    
 })
 
 export default mongoose.model("Result", result)
