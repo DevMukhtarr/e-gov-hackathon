@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import party from "./party";
 const Schema = mongoose.Schema;
 
 const candidate = new Schema({
