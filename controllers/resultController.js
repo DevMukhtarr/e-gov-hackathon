@@ -14,7 +14,7 @@ export const addResult = async (req, res) =>{
         
             if(!(agent && scores && registered_voters && accredited_voters && valid_votes && invalid_votes && election_type && polling_unit)){
                 return res.json({
-                    message: "all inpus cannot be empty"
+                    message: "all inputs cannot be empty"
                 })
             }
         
@@ -35,6 +35,21 @@ export const addResult = async (req, res) =>{
             return res.json({
                 message: "An error occurred" + error
             })
+        }
+    }
+    
+export const getResults = async (req, res) => {
+    try {
+        const results = await result.find();
+
+        return res.json({
+            message: "all results",
+            data: results
+        })
+
+    } catch (error) {
+        return res.json({
+            message: "An error occurred" + error
+        })
     }
 }
-
