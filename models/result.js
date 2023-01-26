@@ -11,6 +11,7 @@ const result = new Schema({
     valid_votes: {type: Number},
     invalid_votes: {type: Number},
     election_type: {type: String, default: null},
+<<<<<<< Updated upstream
 })
 =======
 import user from "./user.js";
@@ -29,4 +30,7 @@ const result = new Schema({
 })
 
 >>>>>>> b337ff2d4309d2a4039d8039f0e984e6fd2e206b
+=======
+}) 
+>>>>>>> Stashed changes
 export default mongoose.model("Result", result)
