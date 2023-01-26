@@ -14,7 +14,12 @@ const userSchema = new Schema({
     gender: {type: String, default:null},
     picture: {type: String, default:null},
     local_government_area: {type: String, default:null},
+<<<<<<< HEAD
     polling_unit: {type: String, default: null},
+=======
+    picture: {type: String, default:null},
+    polling_unit: {type: String, default:null},
+>>>>>>> 9f56547 (wrote result schema)
     role: {
     type: String,
     required: true,
