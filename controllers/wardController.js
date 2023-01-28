@@ -3,6 +3,13 @@ import LGA from '../models/local_government_area.js';
 
 
 export const addWard = async(req, res) =>{
+    const user_role  = req.user.role;
+    
+    if(user_role != "admin"){
+        return res.json({
+            message: "access is restricted"
+        })
+    }
     try {
         const { 
             name,

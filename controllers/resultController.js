@@ -2,6 +2,13 @@ import result from "../models/result.js";
 
 export const addResult = async (req, res) =>{
     try {
+        const user_role  = req.user.role;
+        
+        if(user_role !== "admin" && user_role !== "agent"){
+            return res.json({
+                message: "access is restricted"
+            })
+        }
         const { 
             agent, 
             scores, 

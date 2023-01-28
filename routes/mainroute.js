@@ -8,49 +8,50 @@ import { addCandidate, getCandidates } from '../controllers/candidateController.
 import { addPollingUnit, getPollingUnits } from '../controllers/pollingUnitController.js';
 import { addLocalGovernmentArea, getLocalGovernments, getLocalGovernmentsByStateId } from '../controllers/localGovernmentController.js';
 import { addSenatorialDistrict, getSenatorialDistricts, getSenatorialDistrictById } from '../controllers/senatorialDistrictController.js';
-// import { mapLocalGovernmentId } from '../controllers/stateController.js';
+import { verifyToken } from '../middlewares/auth.js';
+
 const router = express.Router();
 
 // result
-router.post("/add-result", addResult)
-router.get("/results", getResults)
+router.post("/add-result", verifyToken, addResult)
+router.get("/results", verifyToken, getResults)
 
 
 // canditate
-router.post("/add-candidate", addCandidate)
-router.get("/get-candidates", getCandidates)
+router.post("/add-candidate", verifyToken, addCandidate)
+router.get("/get-candidates", verifyToken, getCandidates)
 
 // constituency
-router.post("/add-constituency", addConstituency)
-router.get("/get-constituency", getAllConstituency)
-router.get("/get-constituency/:id", getConstituencyById)
+router.post("/add-constituency", verifyToken, addConstituency)
+router.get("/get-constituency", verifyToken, getAllConstituency)
+router.get("/get-constituency/:id", verifyToken,getConstituencyById)
 
 //ward
-router.post("/add-ward", addWard)
-router.get("/get-wards", getAllWards)
+router.post("/add-ward", verifyToken, addWard)
+router.get("/get-wards", verifyToken, getAllWards)
 
 // lga
-router.post("/add-local-government", addLocalGovernmentArea)
-router.get("/get-local-government", getLocalGovernments)
+router.post("/add-local-government", verifyToken, addLocalGovernmentArea)
+router.get("/get-local-government", verifyToken, getLocalGovernments)
 
 //state
-router.post("/add-state", addState)
-router.get("/get-states", getAllStates)
+router.post("/add-state", verifyToken, addState)
+router.get("/get-states", verifyToken, getAllStates)
 
 //party
-router.post("/add-party", addParty)
-router.get("/get-parties", getAllParties)
+router.post("/add-party", verifyToken, addParty)
+router.get("/get-parties", verifyToken, getAllParties)
 
 // polling unit
-router.post("/add-polling-unit", addPollingUnit)
-router.get("/get-candidates", getPollingUnits)
+router.post("/add-polling-unit", verifyToken, addPollingUnit)
+router.get("/get-candidates", verifyToken, getPollingUnits)
 
 // map local goverment to state
-router.get("/lgas/:stateid", getLocalGovernmentsByStateId);
+router.get("/lgas/:stateid", verifyToken, getLocalGovernmentsByStateId);
 
 // senatorial district
-router.post("/add-senatorial-district", addSenatorialDistrict);
-router.get("/senatorial-districts", getSenatorialDistricts);
-router.get("/senatorial-district/:id", getSenatorialDistrictById);
+router.post("/add-senatorial-district", verifyToken, addSenatorialDistrict);
+router.get("/senatorial-districts", verifyToken, getSenatorialDistricts);
+router.get("/senatorial-district/:id", verifyToken, getSenatorialDistrictById);
 
 export default router;

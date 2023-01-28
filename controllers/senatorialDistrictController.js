@@ -3,6 +3,14 @@ import State from "../models/state.js"
 
 export const addSenatorialDistrict = async(req, res) =>{
     try {
+        const user_role  = req.user.role;
+        
+        if(user_role != "admin"){
+            return res.json({
+                message: "access is restricted"
+            })
+        }
+
         const { 
             name,
             state_id

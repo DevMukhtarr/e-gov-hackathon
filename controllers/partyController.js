@@ -5,6 +5,14 @@ import { json } from "express";
 export const addParty = async(req, res) =>{
 
     try {
+        const user_role  = req.user.role;
+
+        if(user_role != "admin"){
+            return res.json({
+                message: "access is restricted"
+            })
+        }
+        
         const { 
             name,
             logo,

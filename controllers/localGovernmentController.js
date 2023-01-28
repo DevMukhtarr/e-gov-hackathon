@@ -4,6 +4,12 @@ import Constituency from "../models/constituency.js";
 
 export const addLocalGovernmentArea = async (req, res) => {
     try {
+        if(user_role != "admin"){
+            return res.json({
+                message: "access is restricted"
+            })
+        }
+        
         const { 
             name,
             state_id,

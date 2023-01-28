@@ -5,6 +5,14 @@ const toID = mongoose.Types.ObjectId;
 
 export const addState = async(req, res) =>{
     try {
+        const user_role  = req.user.role;
+
+        if(user_role != "admin"){
+            return res.json({
+                message: "access is restricted"
+            })
+        }
+
         const { 
             name
         }= req.body
