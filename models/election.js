@@ -6,7 +6,7 @@ const election = new Schema({
     year: {type: String, default: null},
     start_date: {type: String, default: null},
     end_date: {type: String, default: null},
-    conclusion: {type: String, default: null},
+    conclusion: {type: String, default: null, enum:['completed', 'inconclusive', 'cancelled', 'tie']},
     result: [
                     {party: {type: String, default: null}}, 
                     {candidate: {type: String, default: null}},

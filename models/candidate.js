@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const candidate = new Schema({
     name: {type: String, default:null},
     party: {type: String, default:null},
-    picture: {type: String, default:null},
+    pictures: {type: String, default:null},
     aspired_position: {type: String, default:null},
     constituency: {type: String, default:null}
 })
