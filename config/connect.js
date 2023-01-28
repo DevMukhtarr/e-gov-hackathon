@@ -5,14 +5,26 @@ const app = express();
 
 
 mongoose.set("strictQuery", false);
-mongoose
-  .connect(process.env.MONGO_URI_LOCAL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log("DB Connected!"))
-  .catch((err) => {
-    console.log("not able to connect to database"+ err);
-  });
+if(process.env.ENVIRONMENT == "LOCAL"){
+  mongoose
+    .connect(process.env.MONGO_URI_LOCAL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
+    .then(() => console.log("DB Connected!"))
+    .catch((err) => {
+      console.log("not able to connect to database"+ err);
+    });
+  }else{
+  mongoose
+    .connect(process.env.MONGO_URI_ONLINE, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
+    .then(() => console.log("DB Connected!"))
+    .catch((err) => {
+      console.log("not able to connect to database"+ err);
+    });
+}
 
 export default app;
