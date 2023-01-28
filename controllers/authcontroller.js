@@ -7,7 +7,6 @@ const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
 
 export const signup = async (req, res) => {
     try {
-
         const { 
             first_name,
             last_name,
@@ -16,8 +15,6 @@ export const signup = async (req, res) => {
             state,
             password,
             date_of_birth,
-            date_created,
-            date_modified,
             gender,
             picture,
             local_government_area,
@@ -39,8 +36,6 @@ export const signup = async (req, res) => {
             state,
             password : encryptedPassword,
             date_of_birth,
-            date_created,
-            date_modified,
             gender,
             picture,
             local_government_area,

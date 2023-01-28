@@ -1,44 +1,50 @@
 import { json } from "express";
-import constituency from "../models/constituency.js";
+import Constituency from "../models/constituency.js";
+import State from "../models/state.js";
+import Sd from "../models/senatorial_district.js";
 
 
 export const addConstituency = async(req, res) =>{
+    try{
+        const { name, senatorial_district_id, state_id } =  req.body
 
-    try {
-        const { 
-            name,
-            local_government_areas,
-        }= req.body
+        const senatorial_district = await Sd.findById(senatorial_district_id);
+        const state = await State.findById(state_id);
 
-        if (!(name && local_government_areas)){
-            return json({
-                message: "All fields are required"
+
+        if (senatorial_district == null){
+            return res.json({
+                message: "Senatorial District does not exist"
             })
         }
-        await constituency.create({
-            name,
-            local_government_areas
+        
+        if (state == null){
+            return res.json({
+                message: "State does not exist"
+            })
+        }
+
+        await Constituency.create({
+            name: name,
+            senatorial_district_id: senatorial_district_id,
+            state_id: state_id
         })
+
         return res.json({
-            message: "Constituency added successfully"
+            message: "Constituency Created successfully"
         })
-    } catch(error){
+        
+    }catch(error){
         return res.json({
             message: "An error occurred: " + error
         })
     }
 }
 
-export const getAllConstituency = async (req, res) => {
-    try{
-        const constituencies =  await constituency.find()
+export const getConstituencyById = async (req, res) => {
 
-        return res.json({
-            data: constituencies
-        })
-    }catch(error){
-        return res.json({
-            message: "An error occurred: " + error
-        })
-    }
+}
+
+export const getAllConstituency = async (req, res) => {
+    
 }

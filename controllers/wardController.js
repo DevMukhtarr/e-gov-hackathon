@@ -1,26 +1,29 @@
-import ward from '../models/ward.js';
-import { json } from "express";
+import Ward from '../models/ward.js';
+import LGA from '../models/local_government_area.js';
 
 
 export const addWard = async(req, res) =>{
-
     try {
         const { 
             name,
-            polling_unit,
+            lga_id,
         }= req.body
 
-        if (!(name && polling_unit)){
-            return json({
-                message: "All fields are required"
+        const local_government = await LGA.findById(lga_id);
+
+        if(local_government == null){
+            return res.json({
+                message: "Local goverment does not exist"
             })
         }
-        await ward.create({
+
+        await Ward.create({
             name,
-            polling_unit
+            local_government_area_id: lga_id
         })
+
         return res.json({
-            message: " Ward added successfully"
+            message: "Ward added successfully"
         })
     } catch(error){
         return res.json({
@@ -31,7 +34,7 @@ export const addWard = async(req, res) =>{
 
 export const getAllWards = async (req, res) => {
     try{
-        const wards =  await ward.find()
+        const wards =  await Ward.find()
 
         return res.json({
             data: wards

@@ -39,7 +39,10 @@ export const addResult = async (req, res) =>{
     
 export const getResults = async (req, res) => {
     try {
-        const results = await result.find();
+        const results = await result.find()
+        .populate({path: 'agent', select: "first_name state polling_unit"})
+        // .populate({path: 'polling_unit'})
+        ;
 
         return res.json({
             message: "all results",

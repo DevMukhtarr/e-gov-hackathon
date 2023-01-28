@@ -1,32 +1,19 @@
-import { json } from "express";
-import state from '../models/state.js';
+import State from '../models/state.js';
+import mongoose from "mongoose";
+const toID = mongoose.Types.ObjectId;
 
 
 export const addState = async(req, res) =>{
-
     try {
         const { 
-            name,
-            local_government_areas,
-            constituencies,
-            wards,
-            polling_units,
+            name
         }= req.body
 
-        if (!(name && local_government_areas && constituencies && wards && polling_units)){
-            return json({
-                message: "All fields are required"
-            })
-        }
-        await state.create({
-            name,
-            local_government_areas,
-            constituencies,
-            wards,
-            polling_units,
+        await State.create({
+            name
         })
         return res.json({
-            message: "Constituency added successfully"
+            message: "State added successfully"
         })
     } catch(error){
         return res.json({
@@ -37,7 +24,7 @@ export const addState = async(req, res) =>{
 
 export const getAllStates = async (req, res) => {
     try{
-        const states =  await state.find()
+        const states =  await State.find()
 
         return res.json({
             data: states
