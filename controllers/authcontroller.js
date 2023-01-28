@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import User from '../models/user.js';
+import PollingUnit from '../models/polling_unit.js'
 
 const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
 
@@ -12,12 +13,10 @@ export const signup = async (req, res) => {
             last_name,
             middle_name,
             email,
-            state,
             password,
             date_of_birth,
             gender,
             picture,
-            local_government_area,
             polling_unit,
             role
         } = req.body
@@ -26,6 +25,15 @@ export const signup = async (req, res) => {
         if (existingUser) {
             return res.status(400).json({ message: 'A user with that email already exists' });
         }
+
+        const check_polling_unit = await PollingUnit.findById(polling_unit);
+
+        if(check_polling_unit == null){
+            return res.json({
+                message: "Polling unit does not exist"
+            })
+        }
+
         const encryptedPassword = await bcrypt.hash(password, 12);
         // create a new user
         const user = new User({
@@ -33,12 +41,10 @@ export const signup = async (req, res) => {
             last_name,
             middle_name,
             email,
-            state,
             password : encryptedPassword,
             date_of_birth,
             gender,
             picture,
-            local_government_area,
             polling_unit,
             role
         });
