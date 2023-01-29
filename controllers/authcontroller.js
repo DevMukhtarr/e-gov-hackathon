@@ -56,7 +56,9 @@ export const signup = async (req, res) => {
         await user.save();
 
         // create a JWT with the user's id and email in the payload
-        const token = jwt.sign({ id: user._id, email: user.email, role: user.role }, JWT_SECRET_KEY);
+        const token = jwt.sign({ id: user._id, email: user.email, role: user.role }, JWT_SECRET_KEY, {
+            expiresIn: '10h'
+        });
 
         // send a response to the client
         res.status(201).json({ message: 'User created successfully', token });
@@ -80,7 +82,9 @@ export const signin = async (req, res) => {
         }
 
         // create a JWT with the user's id and email in the payload
-        const token = jwt.sign({ id: user._id, email: user.email, role:user.role }, JWT_SECRET_KEY);
+        const token = jwt.sign({ id: user._id, email: user.email, role:user.role }, JWT_SECRET_KEY, {
+            expiresIn: '10h'
+        });
 
         // send the JWT as a response
         res.status(200).json({ message: 'Signin successful', token });

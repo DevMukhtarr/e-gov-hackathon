@@ -1,4 +1,5 @@
 import result from "../models/result.js";
+import Election from "../models/election.js";
 
 export const addResult = async (req, res) =>{
     try {
@@ -9,6 +10,7 @@ export const addResult = async (req, res) =>{
                 message: "access is restricted"
             })
         }
+
         const { 
             agent, 
             scores, 
@@ -24,8 +26,8 @@ export const addResult = async (req, res) =>{
                     message: "all inputs cannot be empty"
                 })
             }
-        
-            await result.create({
+
+            const new_result = await result.create({
                 agent,
                 scores,
                 registered_voters,
@@ -34,6 +36,14 @@ export const addResult = async (req, res) =>{
                 election_type,
             })
         
+            const election = await Election.find({type: election_type});
+
+            const last_election = election[election.length - 1];
+
+            await last_election.updateOne(
+                {$push: { results: new_result._id }}
+                )
+
             return res.json({
                 message: "result submitted successfully"
             })

@@ -2,6 +2,13 @@ import candidate from "../models/candidate.js";
 
 export const addCandidate = async (req, res) =>{
     try {
+        const user_role  = req.user.role;
+        
+        if(user_role != "admin"){
+            return res.json({
+                message: "access is restricted"
+            })
+        }
         const {
                 name,
                 party, 

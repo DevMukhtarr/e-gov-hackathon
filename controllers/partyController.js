@@ -3,7 +3,6 @@ import { json } from "express";
 
 
 export const addParty = async(req, res) =>{
-
     try {
         const user_role  = req.user.role;
 

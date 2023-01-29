@@ -1,5 +1,5 @@
 import express from 'express';
-import { addResult, getResults  } from '../controllers/resultController.js'
+import { addResult, getResults} from '../controllers/resultController.js'
 import { getAllConstituency, addConstituency, getConstituencyById } from '../controllers/constituencyController.js';
 import { getAllStates, addState } from '../controllers/stateController.js';
 import { addParty, getAllParties } from '../controllers/partyController.js';
@@ -8,6 +8,7 @@ import { addCandidate, getCandidates } from '../controllers/candidateController.
 import { addPollingUnit, getPollingUnits } from '../controllers/pollingUnitController.js';
 import { addLocalGovernmentArea, getLocalGovernments, getLocalGovernmentsByStateId } from '../controllers/localGovernmentController.js';
 import { addSenatorialDistrict, getSenatorialDistricts, getSenatorialDistrictById } from '../controllers/senatorialDistrictController.js';
+import { addElection, updateElectionEndDate, getElections} from '../controllers/electionController.js';
 import { verifyToken } from '../middlewares/auth.js';
 
 const router = express.Router();
@@ -53,5 +54,10 @@ router.get("/lgas/:stateid", verifyToken, getLocalGovernmentsByStateId);
 router.post("/add-senatorial-district", verifyToken, addSenatorialDistrict);
 router.get("/senatorial-districts", verifyToken, getSenatorialDistricts);
 router.get("/senatorial-district/:id", verifyToken, getSenatorialDistrictById);
+
+// election
+router.get("/elections", getElections);
+router.post("/election/add", addElection);
+router.patch("/election/update-end-date", updateElectionEndDate);
 
 export default router;
