@@ -56,8 +56,8 @@ router.get("/senatorial-districts", verifyToken, getSenatorialDistricts);
 router.get("/senatorial-district/:id", verifyToken, getSenatorialDistrictById);
 
 // election
-router.get("/elections", getElections);
-router.post("/election/add", addElection);
-router.patch("/election/update-end-date", updateElectionEndDate);
+router.get("/elections", verifyToken,getElections);
+router.post("/election/add", verifyToken,addElection);
+router.patch("/election/update-end-date", verifyToken,updateElectionEndDate);
 
 export default router;
